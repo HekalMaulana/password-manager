@@ -230,3 +230,5 @@ modules.xml
 *.ipr
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm+all,pycharm,pycharm+iml
+
+./data.txt
