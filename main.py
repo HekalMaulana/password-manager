@@ -56,8 +56,14 @@ def add_data():
                                                f"\nPassword: {password_input} \nits ok to save ?")
 
         if is_ok:
-            with open("data.json", "w") as data:
-                json.dump(new_data, data, indent=4)
+            # Read Data
+            with open("data.json", "r") as data_file:
+                data = json.load(data_file)
+            #     Updating the data
+                data.update(new_data)
+            # Write new data
+            with open("data.json", "w") as data_file:
+                json.dump(data, data_file, indent=4)
             website_textinput.delete(0, END)
             website_textinput.focus()
             password_textinput.delete(0, END)
