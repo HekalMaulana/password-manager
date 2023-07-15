@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from random import randint, choice, shuffle
 import pyperclip
+import json
 
 FONT_NAME = "Arial"
 
@@ -40,6 +41,13 @@ def add_data():
     username_input = username_textinput.get()
     password_input = password_textinput.get()
 
+    new_data = {
+        website_input: {
+            "email": username_input,
+            "password": password_input,
+        },
+    }
+
     if website_input == "" or password_input == "":
         messagebox.showerror(title="Oops", message="Please don't leave any fields empty!")
     else:
@@ -48,8 +56,8 @@ def add_data():
                                                f"\nPassword: {password_input} \nits ok to save ?")
 
         if is_ok:
-            with open("data.txt", "a") as data:
-                data.write(f"{website_input} | {username_input} | {password_input}\n")
+            with open("data.json", "w") as data:
+                json.dump(new_data, data, indent=4)
             website_textinput.delete(0, END)
             website_textinput.focus()
             password_textinput.delete(0, END)
