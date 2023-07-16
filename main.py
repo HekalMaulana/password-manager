@@ -37,7 +37,7 @@ def generate_password():
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def add_data():
-    website_input = website_textinput.get()
+    website_input = website_textinput.get().lower()
     username_input = username_textinput.get()
     password_input = password_textinput.get()
 
@@ -80,7 +80,21 @@ def add_data():
 
 # --------------------------- Find Password ---------------------------- #
 def find_password():
-    pass
+    website_input = website_textinput.get().title().lower()
+
+    # Read the data
+    try:
+        with open("data.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showerror(title="Error", message="No data file found")
+    else:
+        if website_input in data:
+            messagebox.showinfo(title="Your username/email and password",
+                                message=f"Username/Email : {data[website_input]['email']}\n"
+                                        f"password : {data[website_input]['password']}")
+        else:
+            messagebox.showerror(title="Data file not found", message="No data file not found")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
