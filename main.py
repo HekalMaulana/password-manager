@@ -107,8 +107,8 @@ password_label = Label(text="Password:", font=(FONT_NAME, 12, "bold"))
 password_label.grid(column=0, row=3)
 
 # Website textinput
-website_textinput = Entry(width=40)
-website_textinput.grid(column=1, row=1, columnspan=2, sticky="w")
+website_textinput = Entry(width=33)
+website_textinput.grid(column=1, row=1, sticky="w")
 website_textinput.focus()
 
 # username textinput
@@ -121,10 +121,12 @@ password_textinput = Entry(width=33)
 password_textinput.grid(column=1, row=3, sticky="w")
 
 # Find password button
+find_password_button = Button(text="Search", font=FONT_NAME, command=find_password)
+find_password_button.grid(column=2, row=1)
 
 # generate password button
 generate_password_button = Button(text="Generate Password", font=FONT_NAME, command=generate_password)
-generate_password_button.grid(column=2, row=3, padx=5)
+generate_password_button.grid(column=2, row=3)
 
 # Add button
 add_button = Button(text="Add", width=36, font=FONT_NAME, command=add_data)
