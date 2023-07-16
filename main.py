@@ -48,7 +48,7 @@ def add_data():
         },
     }
 
-    if website_input == "" or password_input == "":
+    if len(website_input) == 0 or len(password_input) == 0:
         messagebox.showerror(title="Oops", message="Please don't leave any fields empty!")
     else:
         is_ok = messagebox.askokcancel(title="Save to data.txt",
@@ -56,17 +56,31 @@ def add_data():
                                                f"\nPassword: {password_input} \nits ok to save ?")
 
         if is_ok:
-            # Read Data
-            with open("data.json", "r") as data_file:
-                data = json.load(data_file)
-            #     Updating the data
+            try:
+                # Read Data
+                with open("data.json", "r") as data_file:
+                    data = json.load(data_file)
+            except FileNotFoundError:
+                # Create new data if data.json doesn't exist
+                with open("data.json", "w") as data_file:
+                    json.dump(new_data, data_file, indent=4)
+            else:
+                # Updating the data
                 data.update(new_data)
-            # Write new data
-            with open("data.json", "w") as data_file:
-                json.dump(data, data_file, indent=4)
-            website_textinput.delete(0, END)
-            website_textinput.focus()
-            password_textinput.delete(0, END)
+
+                # Write new data
+                with open("data.json", "w") as data_file:
+                    json.dump(data, data_file, indent=4)
+            finally:
+                # Delete user input and set the cursor focus back to website input
+                website_textinput.delete(0, END)
+                website_textinput.focus()
+                password_textinput.delete(0, END)
+
+
+# --------------------------- Find Password ---------------------------- #
+def find_password():
+    pass
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -105,6 +119,8 @@ username_textinput.insert(0, "example@gmail.com")
 # password textinput
 password_textinput = Entry(width=33)
 password_textinput.grid(column=1, row=3, sticky="w")
+
+# Find password button
 
 # generate password button
 generate_password_button = Button(text="Generate Password", font=FONT_NAME, command=generate_password)
