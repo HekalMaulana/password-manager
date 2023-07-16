@@ -95,7 +95,7 @@ def find_password():
                                         f"password : {data[website_input]['password']}")
         else:
             messagebox.showinfo(title="ERROR!!!", message=f"Your '{website_input}' website not exist in database\n"
-                                                                      f"Please write again the website")
+                                                          f"Please write again the website")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
